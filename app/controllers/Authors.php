@@ -1,7 +1,7 @@
 <?php
 
 
-class Users extends Controller{
+class Authors extends Controller{
 
     private $userModel ;
 
@@ -9,9 +9,14 @@ class Users extends Controller{
     {
         $this->userModel = $this->model('user');
     }
-
     public function index(){
         $this->userModel->test();
+    }
+    public function create(){
+        $this->view('authors/create');
+    }
+    public function store(){
+        
     }
 }
 

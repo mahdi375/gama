@@ -24,7 +24,7 @@
             <a class="nav-link" id="logInbtn" href="">Log in</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="signInbtn" href="<?php genURL('Pages/register') ?>">Sign in</a>
+            <a class="nav-link" id="signInbtn" href="<?php genURL('authors/create') ?>">Sign in</a>
         </li>  
     </ul>
   </div>
@@ -41,12 +41,12 @@
             <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Email">
         </div>
 
-        <label class="sr-only" for="password">password</label>
+        <label class="sr-only" for="log_password">password</label>
         <div class="input-group mb-2 mr-sm-2">
             <div class="input-group-prepend">
             <div class="input-group-text">password</div>
             </div>
-            <input type="text" class="form-control" id="password" placeholder="">
+            <input type="text" class="form-control" id="log_password" placeholder="">
         </div>
 
         <button type="submit" class="btn btn-primary mb-2">Submit</button>
