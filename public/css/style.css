@@ -1,0 +1,18 @@
+
+@media(min-width:768px){
+ #registerForm input , #registerForm label 
+{
+    max-width: 500px;
+}   
+}
+
+@media(min-width:1200px){
+    #logindiv
+    {
+        width:800px;
+        position: relative;
+        bottom: 54px;
+        left: 57px;
+        margin-bottom: -54px;
+    }
+}
