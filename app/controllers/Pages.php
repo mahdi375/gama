@@ -20,9 +20,6 @@ class Pages extends Controller{
     {
         $this->view('pages/about');
     }
-    public function register(){
-        $this->view('pages/register');
-    }
     public function games()
     {
         $this->view('pages/games');

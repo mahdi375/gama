@@ -4,8 +4,8 @@ require_once '../app/bootstrap.php';
 $core = new Core();
 
 
-echo '<pre>';
+//echo '<pre>';
 //print_r($_SERVER);
-echo '</pre>';
+//echo '</pre>';
 
 ?>

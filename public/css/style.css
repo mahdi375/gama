@@ -1,6 +1,6 @@
 
 @media(min-width:768px){
- #registerForm input , #registerForm label 
+ #registerForm input , #registerForm label , #regFeedbackMessage
 {
     max-width: 500px;
 }   
@@ -15,4 +15,8 @@
         left: 57px;
         margin-bottom: -54px;
     }
+}
+#registerForm button
+{
+    width: 70px;
 }
