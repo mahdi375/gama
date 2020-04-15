@@ -14,7 +14,7 @@
             </div>
             <div class="custom-file mb-3">
                 <input type="file" class="custom-file-input" id="registerImage">
-                <label class="custom-file-label" for="registerImage">Choose file...</label>
+                <label class="custom-file-label" id="registerImageLabel" for="registerImage">Choose file...</label>
                 <div class="invalid-feedback">Example invalid custom file feedback</div>
             </div>
             <div class="form-group">
