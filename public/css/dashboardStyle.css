@@ -1,0 +1,72 @@
+#dashLeftDiv
+{
+}
+#dashRightDiv
+{
+    height: 92.3vh;
+    background-color: rgb(241, 241, 241);
+}
+#dashLeftDiv #profileImage
+{
+    height: 200px;
+}
+#dashLeftDiv #profileInfo
+{
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+#dashLeftDiv #profileBar
+{
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+}
+#dashLeftDiv #profileBar button
+{
+    height: 50px;
+    background-color: rgb(173, 173, 173);
+    border: none;
+    color: rgb(255, 255, 255);
+    font-size: large;
+}
+#dashLeftDiv #profileBar button:hover , #dashLeftDiv #profileBar button[class="active"]
+{
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+    background-color: rgb(241, 241, 241);
+}
+#dashLeftDiv #profileImage #profileImg
+{
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    border-radius: 50%;
+    margin: 10px 0;
+}
+@media(max-width:767px){
+    #dashLeftDiv
+    {
+        height: 300px;
+    }
+    
+    #dashLeftDiv #profileImage
+    {
+        height: 140px;
+    }
+    #dashLeftDiv #profileBar
+    {
+        height: 50px;
+        flex-direction: row;
+    }
+    #dashLeftDiv #profileBar button
+    {
+        width: 33.33%;
+    }
+    #dashLeftDiv #profileImage #profileImg
+    {
+        height: 100%;
+        width: auto;
+    }
+}

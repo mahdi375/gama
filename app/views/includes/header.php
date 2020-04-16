@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="<?php genURL('public\css\style.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php genURL('public/bootstrap/bootstrap.css');?>">
+    <link rel="stylesheet" type="text/css" href="<?php genURL('public\css\dashboardStyle.css') ?>">
 </head>
 <body>
     <?php require_once SITE_ROOT.'app\views\includes\navbar.php'; ?>

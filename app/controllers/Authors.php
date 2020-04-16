@@ -14,6 +14,17 @@ class Authors extends Controller{
     public function create(){
         $this->view('authors/create');
     }
+    public function dashboard(){ //get id from session to authorize
+        $games=['game1','game2','game3'];//to show how ...
+
+        //use output buffering to hold showing view
+        ob_start();
+            $this->view('authors/ajax/games',$games);
+            $content = ob_get_contents();
+        ob_end_clean();
+
+        $this->view('authors/dashboard',$content);
+    }
     public function store(){ //ret status: success or status:failure, error:....
         //check request method
         if($_SERVER['REQUEST_METHOD'] !== 'POST'){
@@ -33,6 +44,23 @@ class Authors extends Controller{
             echo json_encode($validate);
             };
     }
+
+    //dashboard btns bar resources
+    //should authorize !!!!!!!!!
+    public function authorGames(){
+        $games=['game1','game2','game3']; //example
+        $this->view('authors/ajax/games',$games);
+    }
+    public function addGame(){
+        $this->view('authors/ajax/new_game');
+    }
+    public function profile(){
+        //should pass author profile to view
+        $this->view('authors/ajax/profile');
+    }
+
+
+    //inner class methods
     private function validateRegForm(){ //ret [true ,user] or [false ,errors]
         $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
         $errors=[
@@ -107,6 +135,8 @@ class Authors extends Controller{
         //update author record
         $this->authorModel->updateImage($id,$name);
     }
+
+    
 }
 
 
