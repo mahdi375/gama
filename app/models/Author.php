@@ -31,8 +31,7 @@ class Author extends Database
         }
         
     }
-
-    public function existsModel($email)
+    public function existsEmail($email)
     {
         $sql='SELECT * FROM `authors` WHERE email = :email ';
         $this->db->query($sql);
@@ -42,6 +41,14 @@ class Author extends Database
         }else{
             return false;
         }
+    }
+    public function updateImage($id,$imageName)
+    {
+        $sql="UPDATE `authors` SET img=:img WHERE id=:id";
+        $this->db->query($sql);
+        $this->db->bind(':img',$imageName);
+        $this->db->bind(':id',$id);
+        $this->db->execute();
     }
 }
 

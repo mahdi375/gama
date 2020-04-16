@@ -10,7 +10,7 @@
             <div class="form-group">
                 <label for="registerEmail">Email address <span class=" ml-4 text-danger" id="registerEmailErr"></span></label>
                 <input type="email" class="form-control" name="email" id="registerEmail" aria-describedby="emailHelp" placeholder="Enter email">
-                <p class="mt-3">image(opt) <span class=" ml-4 text-danger" id="registerImageErr"></span></p>
+                <p class="mt-3">image[opt] <span class=" text-primary "> less than 200kb</span><span class=" ml-4 text-danger" id="registerImageErr"></span></p>
             </div>
             <div class="custom-file mb-3">
                 <input type="file" class="custom-file-input" name="image" id="registerImage" accept="image/*">

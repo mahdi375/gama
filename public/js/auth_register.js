@@ -23,6 +23,7 @@ function feedback(response){
         document.querySelector('#registerNameErr').innerHTML = '' ;
         document.querySelector('#registerEmailErr').innerHTML = '' ;
         document.querySelector('#registerPasswordErr').innerHTML = '' ;
+        document.querySelector('#registerImageErr').innerHTML = '' ;
         document.querySelector('#registerConfirmPasswordErr').innerHTML = '' ;
             setTimeout(()=>{btn.innerHTML="Done" } , 300);
             setTimeout(()=>{btn.classList=" btn btn-success " } , 300);
@@ -39,6 +40,7 @@ function feedback(response){
         document.querySelector('#registerNameErr').innerHTML = response.name_err ;
         document.querySelector('#registerEmailErr').innerHTML = response.email_err ;
         document.querySelector('#registerPasswordErr').innerHTML = response.password_err ;
+        document.querySelector('#registerImageErr').innerHTML = response.image_err;
         document.querySelector('#registerConfirmPasswordErr').innerHTML = response.confirm_password_err ;
     }
     

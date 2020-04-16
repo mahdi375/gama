@@ -26,20 +26,20 @@ class Authors extends Controller{
             die();
         }else{
             //store validated user
-            $id=$this->authorModel->insert($validate);
-            //$validate['id'] = $id;
+            $id=$this->authorModel->insert($validate)->id;
+            $this->storeImage($id);
             unset($validate['password']);//to prevent output password
             $validate['status'] = 'success';
             echo json_encode($validate);
             };
     }
-
     private function validateRegForm(){ //ret [true ,user] or [false ,errors]
         $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
         $errors=[
             'name_err' => '',
             'email_err' => '',
             'password_err' => '',
+            'image_err'=>'',
             'confirm_password_err' => '',
         ];
         $name=$_POST['name'];
@@ -57,7 +57,7 @@ class Authors extends Controller{
             $errors['email_err']='Email is required !';
         }elseif(!filter_var($email,FILTER_VALIDATE_EMAIL)){
             $errors['email_err']='Invalid eamil !';
-        }elseif($this->authorModel->existsModel($email)){
+        }elseif($this->authorModel->existsEmail($email)){
             $errors['email_err']='Email already taken ! ';
         }
         //password
@@ -68,8 +68,18 @@ class Authors extends Controller{
         }elseif($password !== $confirmPasswor){
             $errors['confirm_password_err']='Password not matches!';
         }
+        //image
+        $validType=['image/png','image/jpg','image/jpeg'];
+        $image = $_FILES['image']['name']?$_FILES['image']:false;
+        if($image){
+            if(!in_array($image['type'],$validType)){
+                $errors['image_err']='Invalid image type !( png , jpg and jpeg are valid )';
+            }elseif($image['size']>200000){ //200kb
+                $errors['image_err']='Hight image size !';
+            }
+        }
 
-        if(empty($errors['name_err']) && empty($errors['email_err']) 
+        if(empty($errors['name_err']) && empty($errors['email_err']) && empty($errors['image_err'])
                 && empty($errors['password_err']) && empty($errors['confirm_password_err'])){
             return [
                 'result' => true,
@@ -85,6 +95,17 @@ class Authors extends Controller{
             ];
         }
 
+    }
+    private function storeImage($id){
+        $image=$_FILES['image'];
+        $path="uploads\img\\";
+        $ext='.'.str_replace('image/','',$image['type']);
+        $fileName=$image['tmp_name'];
+        $name = random_int(987355,985674598347);
+        $destination=$path.$name.$ext;
+        move_uploaded_file($fileName,$destination);
+        //update author record
+        $this->authorModel->updateImage($id,$name);
     }
 }
 
