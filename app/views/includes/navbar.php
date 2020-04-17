@@ -20,35 +20,44 @@
         </li>
     </ul>
     <ul class="navbar-nav mr-5">
-        <li class="nav-item">
-            <a class="nav-link" id="logInbtn" href="">Log in</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="signInbtn" href="<?php genURL('authors/create') ?>">Sign in</a>
-        </li>  
+        <?php if(isAuthorLoggedIn()){ ?>
+            <li class="nav-item">
+                <a class="nav-link" id="" href="<?php genURL('authors/dashboard') ?>"><?php echo $_SESSION['author_name']; ?></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="" href="<?php genURL('authors/logout') ?>">Log out</a>
+            </li>
+        <?php }else{ ?>
+            <li class="nav-item">
+                <a class="nav-link" id="logInbtn" href="">Log in</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="signInbtn" href="<?php genURL('authors/create') ?>">Sign in</a>
+            </li>
+        <?php } ?>
     </ul>
   </div>
 </nav>
 
 <div class="container justify-content-lg-end d-none " id="logindiv" >
-    <form class="justify-content-center  pt-2 form-inline" >
+    <form class="justify-content-center  pt-2 form-inline" id="loginForm" >
 
-        <label class="sr-only" for="inlineFormInputGroupUsername2">Email</label>
-        <div class="input-group mb-2 mr-sm-2">
+        <label class="sr-only" for="log_email">Email</label>
+        <div class="input-group mb-2 mr-sm-2 " id="loginEmailDiv">
             <div class="input-group-prepend">
             <div class="input-group-text">@</div>
             </div>
-            <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Email">
+            <input type="text" name="email" class="form-control" id="log_email" >
         </div>
 
         <label class="sr-only" for="log_password">password</label>
-        <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group mb-2 mr-sm-2 " id="loginPasswordDiv">
             <div class="input-group-prepend">
-            <div class="input-group-text">password</div>
+                <div class="input-group-text">password</div>
             </div>
-            <input type="text" class="form-control" id="log_password" placeholder="">
+            <input type="text" name="password" class="form-control" id="log_password" >    
         </div>
 
-        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        <button type="submit" id="logInFormSubmitBtn" class="btn btn-primary mb-2">Submit</button>
     </form>
 </div>

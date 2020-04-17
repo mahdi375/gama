@@ -1,3 +1,7 @@
+#log_password::placeholder , #log_email::placeholder
+{
+    color: rgb(196, 77, 77);
+}
 
 @media(min-width:768px){
  #registerForm input , #registerForm label , #regFeedbackMessage
@@ -5,8 +9,20 @@
     max-width: 500px;
 }   
 }
+@media( max-width:768px ) and ( min-width:575px){
+    #loginEmailDiv
+    {
+        position: relative;
+        right: 13px;
+    }
+    
+}
+@media(max-width:576px){
+   
 
-@media(min-width:1200px){
+}
+
+@media(min-width:1258px){
     #logindiv
     {
         width:800px;

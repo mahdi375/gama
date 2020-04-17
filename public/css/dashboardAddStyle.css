@@ -1,0 +1,30 @@
+
+#dashAddNewGame #newGameImageBottomLable
+{
+    position: relative;
+    right: 15px;
+}
+
+
+#dashAddNewGame #newGameImageTopDiv
+{
+    position: relative;
+    bottom: 7px;
+}
+
+@media(max-width:767px){
+    #dashAddNewGame #newGameCategoryDiv
+    {
+        padding-left: 0;
+    }
+    #dashAddNewGame #newGameImageTopDiv
+    {
+        padding-left: 0;
+    }
+    #dashAddNewGame #newGameImageBottomLable
+    {
+        position: relative;
+        right: 0;
+    }
+
+}

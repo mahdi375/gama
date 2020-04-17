@@ -44,7 +44,27 @@ class Authors extends Controller{
             echo json_encode($validate);
             };
     }
-
+    public function login(){
+        //check request method
+        if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+            redirect('pages/games');
+        }
+        $validate=$this->validateLoginForm();
+        $output=[];
+        if($validate['result']){
+           $this->setSessionTo($validate['author']);
+           $output['result']=true;
+        }else{
+            $output=$validate;
+        }
+        echo json_encode($output);    
+    }
+    public function logout(){
+        unset($_SESSION['author_id']);
+        unset($_SESSION['author_name']);
+        unset($_SESSION['author_email']);
+        redirect('Pages/home');
+    }
     //dashboard btns bar resources
     //should authorize !!!!!!!!!
     public function authorGames(){
@@ -61,7 +81,7 @@ class Authors extends Controller{
 
 
     //inner class methods
-    private function validateRegForm(){ //ret [true ,user] or [false ,errors]
+    private function validateRegForm(){ //ret [true ,author] or [false ,errors]
         $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
         $errors=[
             'name_err' => '',
@@ -129,14 +149,61 @@ class Authors extends Controller{
         $path="uploads\img\\";
         $ext='.'.str_replace('image/','',$image['type']);
         $fileName=$image['tmp_name'];
-        $name = random_int(987355,985674598347);
+        $name =$id.random_int(987355,985674598347);
         $destination=$path.$name.$ext;
         move_uploaded_file($fileName,$destination);
         //update author record
         $this->authorModel->updateImage($id,$name);
     }
+    private function validateLoginForm(){ //ret [true , author] or [false , errors]
+        $author = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+        $errors=[
+            'email_err'=>'',
+            'password_err'=>'',
+        ];
 
-    
+        //validate email
+        if(empty(trim($author['email']))){
+            $errors['email_err']='Empty ! ';
+        }elseif(!filter_var($author['email'],FILTER_VALIDATE_EMAIL)){
+            $errors['email_err']='Invalid !';
+        }elseif(!$this->authorModel->existsEmail($author['email'])){
+            $errors['email_err']='Does not exist !';
+        }
+        //basic password validation
+        if(empty(trim($author['password']))){
+            $errors['password_err']='Empty !';
+        }elseif(strlen($author['password'])<6){
+            $errors['password_err']='Invalid !';
+        }
+        //final password validation
+        if(empty($errors['email_err']) && empty($errors['password_err'])){
+            $dbauthor=$this->authorModel->getAuthorByEmail($author['email']);
+            if(!password_verify($author['password'],$dbauthor->password)){
+                $errors['password_err']='Incorrect !';
+            }
+        }
+        
+        $output=[];
+        if(empty($errors['email_err']) && empty($errors['password_err'])){
+            $output=[
+                'result' => true,
+                'author' => $dbauthor,//this is object 
+            ];
+        }else{
+            $output=[
+                'result' => false,
+                'errors' => $errors,
+                'email'=> $author['email'],
+            ];
+        }
+        return $output;
+    }
+    private function setSessionTo($author){
+        $_SESSION['author_id'] = $author->id;
+        $_SESSION['author_name'] = $author->name;
+        $_SESSION['author_email'] = $author->email;
+    }
 }
 
 

@@ -7,10 +7,11 @@
     <link rel="stylesheet" type="text/css" href="<?php genURL('public\css\style.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php genURL('public/bootstrap/bootstrap.css');?>">
     <link rel="stylesheet" type="text/css" href="<?php genURL('public\css\dashboardStyle.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php genURL('public\css\dashboardAddStyle.css') ?>">
 </head>
 <body>
     <?php require_once SITE_ROOT.'app\views\includes\navbar.php'; ?>
-    <div>
+    <div class="mt-4 mt-md-1">
 
     
     

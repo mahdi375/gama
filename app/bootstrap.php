@@ -1,4 +1,6 @@
 <?php
+//important
+session_start();
 //load configs
 require_once 'config/constants.php';
 

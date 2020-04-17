@@ -50,6 +50,12 @@ class Author extends Database
         $this->db->bind(':id',$id);
         $this->db->execute();
     }
+    public function getAuthorByEmail($email){
+        $sql="SELECT * FROM `authors` WHERE `email`=:email";
+        $this->db->query($sql);
+        $this->db->bind(':email',$email);
+        return $this->db->getSingle();
+    }
 }
 
 
