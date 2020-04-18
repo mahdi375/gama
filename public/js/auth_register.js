@@ -11,6 +11,7 @@ btn.addEventListener('click',(e)=>{
     xhr.addEventListener('readystatechange',()=>{
         if(xhr.readyState===4 && xhr.status===200){
             feedback(JSON.parse(xhr.responseText));
+            //console.log(xhr.responseText);
         }
     });
     xhr.open('POST', 'http://localhost/gama/authors/store');

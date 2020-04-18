@@ -8,7 +8,6 @@ var newGameBottomImageError = document.querySelector('#newGameBottomImageError')
 
 var addGameSuccessMessage = document.querySelector('#addGameSuccessMessage');
 
-
 newGameBtnSubmitBtn.addEventListener('click',(e)=>{
     e.preventDefault();
     addBtnAnim();
@@ -16,13 +15,14 @@ newGameBtnSubmitBtn.addEventListener('click',(e)=>{
     var xhr= new XMLHttpRequest();
     xhr.addEventListener('readystatechange',()=>{
         if(xhr.readyState===4 && xhr.status===200){
-            processNewGameResp(JSON.parse(xhr.responseText));
+           processNewGameResp(JSON.parse(xhr.responseText));
+           //console.log(xhr.responseText);
         }
     });
     xhr.open('POST','http://localhost/gama/games/addNewGame');
     xhr.send(form);
 });
-
+//process recived response
 function processNewGameResp(response){
     if(response.result){
         cleareErrors();
@@ -65,6 +65,7 @@ function cleareErrors(){
     newGameBottomImageError.innerHTML = '';
 
 }
+
 // show selected image name in file input 
 var topImgInput = document.querySelector('#newGameImageTop');
 var topImgLable = document.querySelector('#newGameImageTopLabel');
@@ -76,10 +77,3 @@ var bottomImgLable = document.querySelector('#newGameImageBottomLabel');
 bottomImgInput.addEventListener('change',()=>{
     bottomImgLable.innerHTML = bottomImgInput.files[0].name;
 });
-
-
-
-
-
-
-

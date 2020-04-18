@@ -2,17 +2,27 @@
 
 class Games extends Controller 
 {
-
+    private $gameModel;
+    public function __construct()
+    {
+        $this->gameModel = $this->model('Game');
+    }
     public function addNewGame()
     {
         //check request method
         if($_SERVER['REQUEST_METHOD'] !== 'POST'){
             redirect('pages/games');
         }
+        //authentication
+        if(!isAuthorLoggedIn()){
+            die('Bad Request! ');
+        }
         $vlidate = $this->validateNewGameReq();
         if($vlidate['result']){
+            $id = $this->gameModel->storeGame($vlidate['game']);
+            $this->gameModel->storeGameImages($id);
             echo json_encode([
-                'result'=>true
+                'result'=>true,
             ]);
         }else{
             echo json_encode($vlidate);
@@ -78,6 +88,7 @@ class Games extends Controller
             ];
         }
     }
+    
 }
 
 

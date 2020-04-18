@@ -15,6 +15,10 @@ class Authors extends Controller{
         $this->view('authors/create');
     }
     public function dashboard(){ //get id from session to authorize
+        //authentication
+        if(!isAuthorLoggedIn()){
+            redirect('pages/home');
+        }
         $games=['game1','game2','game3'];//to show how ...
 
         //use output buffering to hold showing view
@@ -38,7 +42,8 @@ class Authors extends Controller{
         }else{
             //store validated user
             $id=$this->authorModel->insert($validate)->id;
-            $this->storeImage($id);
+            //$this->storeImage($id);
+            $this->authorModel->storeImage($id);
             unset($validate['password']);//to prevent output password
             $validate['status'] = 'success';
             echo json_encode($validate);
@@ -176,17 +181,6 @@ class Authors extends Controller{
             ];
         }
 
-    }
-    private function storeImage($id){
-        $image=$_FILES['image'];
-        $path="uploads\img\\";
-        $ext='.'.str_replace('image/','',$image['type']);
-        $fileName=$image['tmp_name'];
-        $name =$id.random_int(987355,985674598347);
-        $destination=$path.$name.$ext;
-        move_uploaded_file($fileName,$destination);
-        //update author record
-        $this->authorModel->updateImage($id,$name);
     }
     private function validateLoginForm(){ //ret [true , author] or [false , errors]
         $author = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
