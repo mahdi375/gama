@@ -7,7 +7,7 @@
 {
     padding-left: 0;
     padding-right: 0;
-    height: 92.3vh;
+    height: auto;
     background-color: rgb(241, 241, 241);
 }
 #dashLeftDiv #profileImage
@@ -72,5 +72,9 @@
     {
         height: 100%;
         width: auto;
+    }
+    #dashRightDiv
+    {
+        height: auto;
     }
 }

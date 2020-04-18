@@ -20,7 +20,7 @@ function btnBarXHRSender(btn){
     xhr = new XMLHttpRequest();
     xhr.addEventListener('readystatechange',()=>{
         if(xhr.readyState===4 && xhr.status === 200){
-            processBtnBarResponse(btn,xhr.responseText);
+            processBtnBarResponse(btn,JSON.parse(xhr.responseText));
         }
     });
     var url ;
@@ -35,5 +35,10 @@ function btnBarXHRSender(btn){
 function processBtnBarResponse(btn,response){
     barBtns.forEach(btn=>{btn.classList=""});
     btn.classList="active";
-    contentDiv.innerHTML=response;
+    contentDiv.innerHTML=response.html;
+
+    var pageScript = document.createElement("script");
+    pageScript.innerHTML = response.script ;
+    document.head.append(pageScript);
+    pageScript.remove();
 };

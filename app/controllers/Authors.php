@@ -69,14 +69,47 @@ class Authors extends Controller{
     //should authorize !!!!!!!!!
     public function authorGames(){
         $games=['game1','game2','game3']; //example
-        $this->view('authors/ajax/games',$games);
+        ob_start();
+            $this->view('authors/ajax/games',$games);
+            $html= ob_get_contents();
+        ob_end_clean();
+        ob_start();
+            require_once SITE_ROOT.'app\views\authors\ajax\games.js';
+            $script = ob_get_contents();
+        ob_end_clean();
+        echo json_encode([
+            'html' => $html,
+            'script' => $script,
+        ]);
     }
     public function addGame(){
-        $this->view('authors/ajax/new_game');
+        ob_start();
+            $this->view('authors/ajax/new_game');
+            $html= ob_get_contents();
+        ob_end_clean();
+        ob_start();
+            require_once SITE_ROOT.'app\views\authors\ajax\new_game.js';
+            $script = ob_get_contents();
+        ob_end_clean();
+        echo json_encode([
+            'html' => $html,
+            'script' => $script,
+        ]);
     }
     public function profile(){
         //should pass author profile to view
-        $this->view('authors/ajax/profile');
+        ob_start();
+            $this->view('authors/ajax/profile');
+            $html= ob_get_contents();
+        ob_end_clean();
+        ob_start();
+            require_once SITE_ROOT.'app\views\authors\ajax\profile.js';
+            $script = ob_get_contents();
+        ob_end_clean();
+        echo json_encode([
+            'html' => $html,
+            'script' => $script,
+        ]);
     }
 
 
@@ -127,8 +160,8 @@ class Authors extends Controller{
             }
         }
 
-        if(empty($errors['name_err']) && empty($errors['email_err']) && empty($errors['image_err'])
-                && empty($errors['password_err']) && empty($errors['confirm_password_err'])){
+        //use a simple helper function insted of => if(empty($errors['name_err']) && empty($errors['email_err']) && empty($errors['image_err']) && empty($errors['password_err']) && empty($errors['confirm_password_err'])){
+        if(!hsaError($errors)){
             return [
                 'result' => true,
                 'name'=>$name,
@@ -177,7 +210,8 @@ class Authors extends Controller{
             $errors['password_err']='Invalid !';
         }
         //final password validation
-        if(empty($errors['email_err']) && empty($errors['password_err'])){
+        //use a simple helper function insted of => if(empty($errors['email_err']) && empty($errors['password_err'])){
+        if(!hsaError($errors)){
             $dbauthor=$this->authorModel->getAuthorByEmail($author['email']);
             if(!password_verify($author['password'],$dbauthor->password)){
                 $errors['password_err']='Incorrect !';
@@ -185,7 +219,8 @@ class Authors extends Controller{
         }
         
         $output=[];
-        if(empty($errors['email_err']) && empty($errors['password_err'])){
+        //use a simple helper function insted of => if(empty($errors['email_err']) && empty($errors['password_err'])){
+        if(!hsaError($errors)){
             $output=[
                 'result' => true,
                 'author' => $dbauthor,//this is object 

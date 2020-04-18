@@ -11,7 +11,7 @@
 </head>
 <body>
     <?php require_once SITE_ROOT.'app\views\includes\navbar.php'; ?>
-    <div class="mt-4 mt-md-1">
+    <div >
 
     
     
