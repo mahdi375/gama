@@ -1,0 +1,29 @@
+
+#gamesPage #GameCardDiv
+{
+    box-shadow: -5px 7px 20px rgb(37, 37, 37);
+}
+#gamesPage #gamesCardDescription
+{
+    min-height: 72px;
+}
+
+@media(max-width:991){
+    #gamesPage #gamesCardDescription
+    {
+        min-height: auto;
+    }
+}
+
+@media(min-width:992px){
+    #gamesPage #gamesCardImage
+    {
+        height: 15.3rem;
+    }
+}
+@media(min-width:1200px){
+    #gamesPage #gamesCardImage
+    {
+        height: 19.3rem;
+    }
+}

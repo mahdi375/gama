@@ -35,7 +35,7 @@
             <label class="custom-file-label" id="newGameImageBottomLabel" for="newGameImageBottom">Choose file...</label>
         </div>
 
-        <div id="newGameBtnDiv" class="row justify-content-center justify-content-md-start ml-md-3 mt-4">
+        <div id="newGameBtnDiv" class="row justify-content-center justify-content-md-start ml-md-3 mt-4 mb-4 mb-lg-0">
             <button type="submit" id="newGameBtnSubmitBtn" class="btn btn-primary" >Add Game</button>
         </div>
     </form>

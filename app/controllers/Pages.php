@@ -3,7 +3,12 @@
 
 class Pages extends Controller{
 
+    private $gameModel;
 
+    public function __construct()
+    {
+        $this->gameModel = $this->model('game');    
+    }
     public function index()
     {
         $this->home();
@@ -22,7 +27,9 @@ class Pages extends Controller{
     }
     public function games()
     {
-        $this->view('pages/games');
+        $data=[];
+        $data['games']=$this->gameModel->getAcceptedGames();
+        $this->view('pages/games',$data);
     }
 }
 

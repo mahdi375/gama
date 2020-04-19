@@ -56,7 +56,8 @@ function processLoginResponse(response){
     if(response.result){
         submitBtn.innerHTML=' Done ';
         submitBtn.classList='btn btn-success mb-2';
-        setTimeout(()=>{location.replace('http://localhost/gama/authors/dashboard');} , 700);
+        var url='http://localhost/gama/authors/dashboard/'+response.name;
+        setTimeout(()=>{location.replace(url);} , 600);
     }else{
         submitBtn.disabled = false;
         emailInput.value = '';

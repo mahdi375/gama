@@ -8,6 +8,7 @@ class Authors extends Controller{
     public function __construct()
     {
         $this->authorModel = $this->model('author');
+        $this->gameModel = $this->model('game');
     }
     public function index(){
     }
@@ -19,15 +20,20 @@ class Authors extends Controller{
         if(!isAuthorLoggedIn()){
             redirect('pages/home');
         }
-        $games=['game1','game2','game3'];//to show how ...
-
+        $author = $this->authorModel->getAuthorByEmail($_SESSION['author_email']);
+        unset($author->password);
+        if(is_null($author->img)){
+            $author->img = '9999.jpg';
+        }
+        $author->img = SITE_URL.'public\uploads\img\\'.$author->img; 
         //use output buffering to hold showing view
+        //default view is author games wich is first one
         ob_start();
-            $this->view('authors/ajax/games',$games);
-            $content = ob_get_contents();
+            $this->authorGames();
+            $content = json_decode(ob_get_contents());
         ob_end_clean();
 
-        $this->view('authors/dashboard',$content);
+        $this->view('authors/dashboard',$content,$author);
     }
     public function store(){ //ret status: success or status:failure, error:....
         //check request method
@@ -42,7 +48,6 @@ class Authors extends Controller{
         }else{
             //store validated user
             $id=$this->authorModel->insert($validate)->id;
-            //$this->storeImage($id);
             $this->authorModel->storeImage($id);
             unset($validate['password']);//to prevent output password
             $validate['status'] = 'success';
@@ -58,6 +63,7 @@ class Authors extends Controller{
         $output=[];
         if($validate['result']){
            $this->setSessionTo($validate['author']);
+           $output['name']=$validate['author']->name;
            $output['result']=true;
         }else{
             $output=$validate;
@@ -73,9 +79,15 @@ class Authors extends Controller{
     //dashboard btns bar resources
     //should authorize !!!!!!!!!
     public function authorGames(){
-        $games=['game1','game2','game3']; //example
+        //authentication
+        if(!isAuthorLoggedIn()){
+            die('Bad Request');
+        }
+        $data=[];
+        $games=$this->gameModel->getAuthorGames($_SESSION['author_id']);
+        $data['games']=$games;
         ob_start();
-            $this->view('authors/ajax/games',$games);
+            $this->view('authors/ajax/games',$data);
             $html= ob_get_contents();
         ob_end_clean();
         ob_start();

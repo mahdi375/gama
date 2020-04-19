@@ -31,7 +31,7 @@ function processNewGameResp(response){
                             newGameBtnSubmitBtn.classList='btn btn-success';
                             addGameSuccessMessage.classList='p-2 mt-3 mb-2 bg-info mb-4 mb-lg-0 text-white font-weight-bold'
                         },351);
-        addGameSuccessMessage.innerHTML='Your new game was recive, be patient for last validation';
+        addGameSuccessMessage.innerHTML='Your new game was recive, be patient for Evalution result';
         
         console.log('OK')
     }else{

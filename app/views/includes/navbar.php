@@ -22,7 +22,7 @@
     <ul class="navbar-nav mr-5">
         <?php if(isAuthorLoggedIn()){ ?>
             <li class="nav-item">
-                <a class="nav-link" id="" href="<?php genURL('authors/dashboard') ?>"><?php echo $_SESSION['author_name']; ?></a>
+                <a class="nav-link" id="" href="<?php genURL('authors/dashboard/'.$_SESSION['author_name']) ?>"><?php echo $_SESSION['author_name']; ?></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="" href="<?php genURL('authors/logout') ?>">Log out</a>

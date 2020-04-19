@@ -44,15 +44,17 @@ class Author extends Database
     }
     public function storeImage($id)
     {
-        $image=$_FILES['image'];
-        $path=SITE_ROOT."public\uploads\img\\";
-        $ext='.'.str_replace('image/','',$image['type']);
-        $fileName=$image['tmp_name'];
-        $name =$id.random_int(987355,985674598347).$ext;
-        $destination=$path.$name;
-        move_uploaded_file($fileName,$destination);
-        //update author record
-        $this->updateImage($id,$name);        
+        if(!empty($_FILES['image']['name'])){
+            $image=$_FILES['image'];
+            $path=SITE_ROOT."public\uploads\img\\";
+            $ext='.'.str_replace('image/','',$image['type']);
+            $fileName=$image['tmp_name'];
+            $name =$id.random_int(987355,985674598347).$ext;
+            $destination=$path.$name;
+            move_uploaded_file($fileName,$destination);
+            //update author record
+            $this->updateImage($id,$name);
+        }        
     }
     public function getAuthorByEmail($email){
         $sql="SELECT * FROM `authors` WHERE `email`=:email";

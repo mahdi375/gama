@@ -7,7 +7,6 @@ class Game {
     {
         $this->db = new Database();
     }
-
     public function storeGame($game){
         $sql="INSERT INTO `games`( author_id, category_id , title , description  , state )
               VALUES (:aurhorID , :categoryID , :title , :description , :state)";
@@ -45,6 +44,17 @@ class Game {
             $nameSecond='';
         }
         $this->updateImageColumns($id,$nameFirst,$nameSecond);
+    }
+    public function getAuthorGames($id){
+        $sql='SELECT * FROM `games` WHERE author_id=:id';
+        $this->db->query($sql);
+        $this->db->bind(':id',$id);
+        return $this->db->getResults();
+    }
+    public function getAcceptedGames(){
+        $sql='SELECT * FROM `games` WHERE state = 2';
+        $this->db->query($sql);
+        return $this->db->getResults();
     }
 
 

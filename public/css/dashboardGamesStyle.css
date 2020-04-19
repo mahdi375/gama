@@ -1,0 +1,33 @@
+
+#dashGamesCardsDiv #dashGamesDeleteBtn
+{
+    background-color: rgb(255, 227, 227);
+}
+#dashGamesCardsDiv #dashGamesDeleteBtn:hover
+{
+    background-color: rgb(255, 177, 177);
+}
+#dashGamesCardsDiv #dashGamesMoreBtn
+{
+    background-color: rgb(201, 233, 255);
+}
+#dashGamesCardsDiv #dashGamesMoreBtn:hover
+{
+    background-color: rgb(131, 205, 255);
+}
+#dashGamesCardsDiv #dashGameAccepteddBtn
+{
+    background-color: rgb(209, 255, 216);
+}
+#dashGamesCardsDiv #dashGameRejectedBtn
+{
+    background-color: rgb(255, 193, 193);
+}
+#dashGamesCardsDiv #dashGameEvaluatingBtn
+{
+    background-color: rgb(249, 255, 199);
+}
+#dashGameCardDiv
+{
+    box-shadow: -5px 6px 25px rgb(36, 36, 36);
+}

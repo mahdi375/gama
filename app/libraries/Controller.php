@@ -13,7 +13,7 @@ class Controller {
         return new $model;
     }
     //load view
-    public function view(string $view, $data=[]){
+    public function view(string $view, $data=[], $author=[]){
         if(file_exists(SITE_ROOT.'app/views/'.$view.'.php')){
             require_once SITE_ROOT.'app/views/'.$view.'.php';
         }else{
