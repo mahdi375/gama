@@ -18,7 +18,7 @@ class Authors extends Controller{
     public function dashboard(){ //get id from session to authorize
         //authentication
         if(!isAuthorLoggedIn()){
-            redirect('pages/home');
+            redirect('pages/gama');
         }
         $author = $this->authorModel->getAuthorByEmail($_SESSION['author_email']);
         unset($author->password);
@@ -74,7 +74,7 @@ class Authors extends Controller{
         unset($_SESSION['author_id']);
         unset($_SESSION['author_name']);
         unset($_SESSION['author_email']);
-        redirect('Pages/home');
+        redirect('Pages/gama');
     }
     //dashboard btns bar resources
     //should authorize !!!!!!!!!

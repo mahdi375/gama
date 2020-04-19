@@ -101,17 +101,17 @@
         </div>
         <div class="col-md-6 col-lg-4 mb-3 ">
             <div class="card bg-dark text-white">
-                <img src="<?php genURL('public\img\Simulation.jpg') ?>" class="card-img" >
+                <img src="<?php genURL('public\img\Adventure.jpg') ?>" class="card-img" >
                 <div class="card-img-overlay">
-                <a href="#" class="text-light"><h5 class="card-title">Simulation</h5></a>
+                <a href="#" class="text-light"><h5 class="card-title">Adventure</h5></a>
             </div>
             </div>
         </div>
         <div class="col-md-6 col-lg-4 mb-3 ">
             <div class="card bg-dark text-white">
-                <img src="<?php genURL('public\img\Sport.jpg') ?>" class="card-img" >
+                <img src="<?php genURL('public\img\Adventure.jpg') ?>" class="card-img" >
                 <div class="card-img-overlay">
-                <a href="#" class="text-light"><h5 class="card-title">Sport</h5></a>
+                <a href="#" class="text-light"><h5 class="card-title">Adventure</h5></a>
             </div>
             </div>
         </div>

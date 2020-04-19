@@ -1,8 +1,8 @@
-#homePage #homeNewGamesCard
+#gamaPage #gamaNewGamesCard
 {
     padding: 0;
 }
-#homePage #homeOwnerDiv
+#gamaPage #gamaOwnerDiv
 {
     width: 100%;
     height: 200px;
