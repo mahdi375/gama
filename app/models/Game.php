@@ -87,7 +87,7 @@ class Game {
         return $this->db->getResults();
     }
     public function getGamesOfCategory($categoryID){
-        $sql='SELECT * FROM `games` WHERE category_id=:category';
+        $sql='SELECT * FROM `games` WHERE category_id=:category AND state=2';
         $this->db->query($sql);
         $this->db->bind(':category',$categoryID);
         return $this->db->getResults();

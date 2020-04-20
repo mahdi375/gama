@@ -36,9 +36,31 @@ class Games extends Controller
         if($game->state != 2){
             redirect('pages/games');
         }
+        //prepare short description
+        if(strlen($game->description)>200){
+            $game->short_description = substr($game->description,0,200).' . . .';
+        }else{
+            //if description length be less than 200 , short be half of it
+            $length = round(0.5 * strlen($game->description));
+            $game->short_description = substr($game->description,0,$length).' . . .'; 
+            unset($length);
+        }
         //related games
         $related = $this->gameModel->getGamesOfCategory($game->category_id);
-
+        if(count($related)>4){
+            $i = 4 ;
+            while($i<(count($related)+2))
+            {
+                unset($related[$i]);
+                $i++;
+            }
+        }
+        foreach($related as $relatedGame){
+            if(strlen($relatedGame->description)>60 ){
+                $relatedGame->description = substr($relatedGame->description,0,56).' . . . ';
+            }
+            unset($relatedGame);
+        }
         $data=[];
         $data['related']=$related;
         $data['game']=$game;

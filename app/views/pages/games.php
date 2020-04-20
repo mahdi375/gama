@@ -1,7 +1,7 @@
 <?php require_once SITE_ROOT.'app/views/includes/header.php'; ?>
 
     <div class="container" id="gamesPage">
-        <h1> Games: </h1> 
+        <h1 class="text-muted"> Games: </h1> 
 
     
     <div id="GamesCardsDiv" class="row pl-lg-5 pr-lg-5 ">
@@ -17,7 +17,7 @@
         </div>
         <img src="<?php genURL('public\uploads\games\\'.$game->TopImg) ?>" class=" " id="gamesCardImage" >   
         <div class="card-body">
-            <p class="card-text" id="gamesCardDescription"><?php
+            <p class="card-text text-justify" id="gamesCardDescription"><?php
             if(strlen($game->description)>100){
                 echo substr($game->description,0,100).'  . . .';
             }else{ 
