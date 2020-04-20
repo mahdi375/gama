@@ -20,13 +20,13 @@
                 ?></p>
                 <div class="row justify-content-around">
                     <a href="#" id="dashGamesDeleteBtn" class="btn col col-sm-3 ">Delete</a>
-                    <a href="#" id="dashGamesMoreBtn" class="btn col col-sm-3 ">More</a>
+                    <a href="<?php genURL('games/show/'.$game->id.'-'.str_replace(' ','-',$game->title)) ?>" id="dashGamesMoreBtn" class="btn col col-sm-3 <?php if($game->state !=2){ echo 'disabled'; } ?> ">More</a>
                     <?php if($game->state == 2){ ?>
                     <a href="#" id="dashGameAccepteddBtn" class="btn col col-sm-3 disabled">Accepted</a>
                     <?php }elseif($game->state == 3){ ?>
                     <a href="#" id="dashGameRejectedBtn" class="btn col col-sm-3 disabled" >Rejected</a>
                     <?php }else{ ?>
-                    <a href="#" id="dashGameEvaluatingBtn" class="btn col col-sm-3  disabled" >Evaluating</a>
+                    <a href="#" id="dashGameEvaluatingBtn" class="btn col col-sm-3  disabled" >Evaluating...</a>
                     <?php } ?>
                 </div>
             </div>

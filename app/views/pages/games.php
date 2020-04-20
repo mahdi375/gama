@@ -25,7 +25,7 @@
             }
             ?></p>
             <div class="row justify-content-around">
-                <a href="#" id="GamesMoreBtn" class="btn col col-sm-3 ">More</a>
+                <a href="<?php genURL('games\show\\'.$game->id.'-'.str_replace(' ','-',$game->title)) ?>" id="GamesMoreBtn" class="btn col col-sm-3 ">More</a>
             </div>
         </div>
         

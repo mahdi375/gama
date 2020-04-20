@@ -1,10 +1,57 @@
-#gamaPage #gamaNewGamesCard
+#homePage #homeNewGamesCard
 {
     padding: 0;
 }
-#gamaPage #gamaOwnerDiv
+#homePage #homeOwnerDiv
 {
     width: 100%;
     height: 200px;
     background-color: rgb(187, 138, 212);
+}
+
+#homePage #homeCategoryCard{
+    filter: opacity(80%);
+}
+#homePage #homeCategoryCard:hover{
+    filter: opacity(100%);
+}
+#homePage #homeCategoryCard #homeCategoryInnerCard{
+    box-shadow: -5px 7px 15px black;
+}
+@media(min-width:1201px){
+    #homePage #homeNewGameImage , #homePage #homeRandomGameImage
+    {
+        height: 12rem;
+    }
+    #homePage #homeNewGameCardDescription ,  #homePage #homeRandomGameCardDescription{
+        height: 4rem;
+    }
+   
+}
+@media(min-width:992px) and (max-width:1200px){
+    #homePage #homeNewGameImage , #homePage #homeRandomGameImage
+    {
+        height: 11rem;
+    }
+    #homePage #homeNewGameCardDescription ,  #homePage #homeRandomGameCardDescription{
+        height: 5rem;
+    }
+    
+}
+@media(min-width:768px) and (max-width:991px){
+    #homePage #homeNewGameImage  , #homePage #homeRandomGameImage
+    {
+        height: 18rem;
+    }
+    #homePage #homeNewGameCardDescription ,  #homePage #homeRandomGameCardDescription{
+        height: 3rem;
+    }
+    
+}
+@media(max-width:767px){
+    #homePage #homeNewGameImage , #homePage #homeRandomGameImage
+    {
+        max-height: 27rem;
+    }
+   
 }

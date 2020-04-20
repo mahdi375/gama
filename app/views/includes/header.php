@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="<?php genURL('public\css\dashboardAddStyle.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php genURL('public\css\dashboardGamesStyle.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php genURL('public\css\gamesStyle.css') ?>">
-    <link rel="stylesheet" type="text/css" href="<?php genURL('public\css\gamaStyle.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php genURL('public\css\homeStyle.css') ?>">
 </head>
 <body>
     <?php require_once SITE_ROOT.'app\views\includes\navbar.php'; ?>

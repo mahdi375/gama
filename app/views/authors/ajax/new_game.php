@@ -13,8 +13,9 @@
             <label for="newGameCategory">Category: <span id="newGameCategoryError" class=" ml-2 text-danger" ></span></label>
             <select id="newGameCategory" name="category"  class="form-control">
                 <option selected  disabled>Category</option>
-                <option value="1">Action</option>
-                <option value="2">Recor</option>
+                <?php foreach($data['categories'] as $item){ ?>
+                <option value="<?php echo $item->id; ?>"><?php echo $item->name; ?></option>
+                <?php } ?>
             </select>
         </div>
 

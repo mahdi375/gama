@@ -28,6 +28,22 @@ class Games extends Controller
             echo json_encode($vlidate);
         }
     }
+    public function show($title){
+        $title=filter_var($title,FILTER_SANITIZE_URL);
+        $id=explode('-',$title)[0];
+        $game=$this->gameModel->getGame($id);
+        //check game published or not
+        if($game->state != 2){
+            redirect('pages/games');
+        }
+        //related games
+        $related = $this->gameModel->getGamesOfCategory($game->category_id);
+
+        $data=[];
+        $data['related']=$related;
+        $data['game']=$game;
+        $this->view('games/show',$data);
+    }
 
 
     //inner obj methods

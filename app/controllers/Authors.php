@@ -4,7 +4,7 @@
 class Authors extends Controller{
 
     private $authorModel ;
-
+    private $gameModel ;
     public function __construct()
     {
         $this->authorModel = $this->model('author');
@@ -18,7 +18,7 @@ class Authors extends Controller{
     public function dashboard(){ //get id from session to authorize
         //authentication
         if(!isAuthorLoggedIn()){
-            redirect('pages/gama');
+            redirect('pages/home');
         }
         $author = $this->authorModel->getAuthorByEmail($_SESSION['author_email']);
         unset($author->password);
@@ -74,7 +74,7 @@ class Authors extends Controller{
         unset($_SESSION['author_id']);
         unset($_SESSION['author_name']);
         unset($_SESSION['author_email']);
-        redirect('Pages/gama');
+        redirect('Pages/home');
     }
     //dashboard btns bar resources
     //should authorize !!!!!!!!!
@@ -100,10 +100,15 @@ class Authors extends Controller{
         ]);
     }
     public function addGame(){
+        //for html content
         ob_start();
-            $this->view('authors/ajax/new_game');
+            $data=[];
+            $categories = $this->gameModel->getCategories();
+            $data['categories']=$categories;
+            $this->view('authors/ajax/new_game',$data);
             $html= ob_get_contents();
         ob_end_clean();
+        //for script content
         ob_start();
             require_once SITE_ROOT.'app\views\authors\ajax\new_game.js';
             $script = ob_get_contents();
