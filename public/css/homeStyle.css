@@ -6,7 +6,13 @@
 {
     width: 100%;
     height: 200px;
-    background-color: rgb(187, 138, 212);
+    position: relative;
+    left: 15px;
+    background-color: rgb(240, 240, 240);
+}
+#homePage #homeOwnerDiv #HomeOwnerImage{
+    border-radius: 50%;
+    box-shadow: 5px 7px 25px rgb(0, 0, 0);
 }
 
 #homePage #homeCategoryCard{
@@ -26,6 +32,10 @@
     #homePage #homeNewGameCardDescription ,  #homePage #homeRandomGameCardDescription{
         height: 4rem;
     }
+    #homePage #homeOwnerDiv #HomeOwnerImage{
+        height: 10rem;
+        width: 10rem;
+    }
    
 }
 @media(min-width:992px) and (max-width:1200px){
@@ -35,6 +45,10 @@
     }
     #homePage #homeNewGameCardDescription ,  #homePage #homeRandomGameCardDescription{
         height: 5rem;
+    }
+    #homePage #homeOwnerDiv #HomeOwnerImage{
+        height: 10rem;
+        width: 10rem;
     }
     
 }
@@ -46,12 +60,33 @@
     #homePage #homeNewGameCardDescription ,  #homePage #homeRandomGameCardDescription{
         height: 3rem;
     }
+    #homePage #homeOwnerDiv #HomeOwnerImage{
+        height: 7rem;
+        width: 7rem;
+    }
     
+}
+
+@media(min-width:576px) and (max-width:766px){
+    #homePage #homeOwnerDiv #homeOwnerMahdi{
+        font-size: 34pt;
+        margin-top: 65px;
+    }
 }
 @media(max-width:767px){
     #homePage #homeNewGameImage , #homePage #homeRandomGameImage
     {
         max-height: 27rem;
     }
+    #homePage #homeOwnerDiv #HomeOwnerImage{
+        height: 6rem;
+        width: 6rem;
+    }    
    
+}
+@media(max-width:575px){
+    #homePage #homeOwnerDiv #homeOwnerMahdi{
+        font-size: 24pt;
+    }
+
 }

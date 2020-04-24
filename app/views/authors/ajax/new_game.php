@@ -1,5 +1,5 @@
 <div id="dashAddNewGame" class="container">
-    <h3 class="pt-2 pl-md-4 row justify-content-center justify-content-md-start">Add New Game :</h3>
+    <h3 class="text-muted pt-2 pl-md-4 row justify-content-center justify-content-md-start">Add New Game :</h3>
 
     <form action="" class="mt-md-3" id="dashNewGameForm">
 

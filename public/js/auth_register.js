@@ -31,8 +31,9 @@ function feedback(response){
         var messBox =document.querySelector('#regFeedbackMessage');
         messBox.innerHTML=response.name+' Successfuly Registered ';
         messBox.classList='bg-success mt-2 text-white form-control ';
-
-        console.log(response);
+        //redirect to dashboard
+        var url='http://localhost/gama/authors/dashboard/'+response.name;
+        setTimeout(()=>{location.replace(url);} , 600);
 
     }else if(response.status === 'failure'){
         //show errors

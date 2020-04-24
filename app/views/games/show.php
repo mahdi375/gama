@@ -14,7 +14,7 @@
             <p class="display-5 mb-0 text-justify mt-3 p-md-5 pb-md-3"><?php echo $data['game']->short_description; ?></p>
             <footer class="blockquote-footer text-center mt-4 mt-md-0"><?php echo $data['game']->author; ?></footer>
         </div>
-        <div id="topImage" class="row justify-content-center mt-5 mb-2 pl-3 pr-3">
+        <div id="topImage" class="row justify-content-center mt-5 mb-5 pl-3 pr-3">
             <img class="col col-sm-10 col-md-8" id="showTopImageImg" src="<?php genURL('public\uploads\games\\'.$data['game']->TopImg) ?>" alt="">
         </div>
         <div id="fullDescription">
@@ -27,7 +27,7 @@
         <?php } ?>
         <div id="relatedGames" class="mt-5 pt-5">
             <div id="showRelatedGamesDiv" >
-                <h1 class="h3 text-muted">Related Games :</h1>
+                <h1 class="h5 md-3 text-muted ">Published Related Games :</h1>
                 <div class="row justify-content-around mb-5">
                 <?php  foreach($data['related'] as $game){?>
                 <div class="col-6 col-md-3 mb-3 p-0 ">

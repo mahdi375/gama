@@ -1,6 +1,10 @@
 <div id="dashAddNewGame" class="container">
-    <h3 class="pt-2 mb-md-5 pl-md-4 row justify-content-center justify-content-md-start"><?php echo ucwords($_SESSION['author_name']); ?> Games :</h3>
-
+    <?php if($data['games']){ ?>
+    <h3 class=" text-muted pt-2 pl-md-4 row justify-content-center justify-content-md-start"><?php echo ucwords($_SESSION['author_name']); ?> Games :</h3>
+    <p class=" mb-md-3 text-info "><span class="h2 text-info font-weight-bolder">* </span>Your created games are publishe after evaluating. </p>
+    <?php }else{ ?>
+    <p class="display-4 text-justify">Let's create your first game on GaMa :)</p>
+    <?php }?>
     <div id="dashGamesCardsDiv" class="pl-lg-5 pr-lg-5">
     
     <?php 
@@ -22,7 +26,7 @@
                     <a href="#" id="dashGamesDeleteBtn" class="btn col col-sm-3 ">Delete</a>
                     <a href="<?php genURL('games/show/'.$game->id.'-'.str_replace(' ','-',$game->title)) ?>" id="dashGamesMoreBtn" class="btn col col-sm-3 <?php if($game->state !=2){ echo 'disabled'; } ?> ">More</a>
                     <?php if($game->state == 2){ ?>
-                    <a href="#" id="dashGameAccepteddBtn" class="btn col col-sm-3 disabled">Accepted</a>
+                    <a href="#" id="dashGameAccepteddBtn" class="btn col col-sm-3 disabled">Published</a>
                     <?php }elseif($game->state == 3){ ?>
                     <a href="#" id="dashGameRejectedBtn" class="btn col col-sm-3 disabled" >Rejected</a>
                     <?php }else{ ?>

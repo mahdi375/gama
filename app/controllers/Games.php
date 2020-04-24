@@ -28,7 +28,8 @@ class Games extends Controller
             echo json_encode($vlidate);
         }
     }
-    public function show($title){
+    public function show($title)
+    {
         $title=filter_var($title,FILTER_SANITIZE_URL);
         $id=explode('-',$title)[0];
         $game=$this->gameModel->getGame($id);
@@ -65,6 +66,15 @@ class Games extends Controller
         $data['related']=$related;
         $data['game']=$game;
         $this->view('games/show',$data);
+    }
+    public function category($title)
+    {
+        $categoryID=explode('-',$title)[0];
+        $categoryName=explode('-',$title)[1];
+        $games=$this->gameModel->getGamesOfCategory($categoryID);
+        $data['games']=$games;
+        $data['category']=$categoryName;
+        $this->view('games\category',$data);
     }
 
 

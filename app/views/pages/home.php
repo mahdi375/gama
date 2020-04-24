@@ -2,7 +2,7 @@
 
     <div class="container" id="homePage">
         <h1>GaMa</h1>
-        <p>brief introductions of world popular games</p>
+        <p class="text-info">brief introductions of world popular games</p>
 
         <div id="homeNewGamesDiv" class="mt-4">
             <h2 class="h4 text-muted" >New Games :</h2>
@@ -31,13 +31,21 @@
         </div>
 
         
-        <div id="homeOwnerDiv" class="mb-4">
-            <h1>OWNER MAHDI GHASEMI</h1>
+        <div id="homeOwnerDiv" class="mb-4 row display-md-inline-flex">
+            <div class="col-sm-8 mt-md-5">
+                <h1 class="display-4 mt-md-2 row justify-content-center" id="homeOwnerMahdi">Mahdi Ghasemi</h1>
+                <a href="<?php genURL('Pages/about') ?>" class=" row justify-content-center text-info text-decoration-none"><span>__Resume__</span></a>
+            </div>
+            <div class="col-sm-4 row justify-content-center mt-sm-5 ml-2 ml-sm-0 mt-lg-3">
+                <img id="HomeOwnerImage" src="<?php genURL('public\img\mahdi_ghasemi.jpg') ?>" alt="mahdi_gahsemi">
+            </div>
         </div>
+
         <div id="categories" class="mb-5 pb-4">
+            <h2 class="h4 text-muted" >Categories :</h2>
             <div class="row justify-content-around mb-5">
             <?php foreach($data['categories'] as $item){ ?>
-                <div class="col-md-6 col-lg-4 mb-3 " id="homeCategoryCard" ><a href="#" class="text-light">
+                <div class="col-md-6 col-lg-4 mb-3 " id="homeCategoryCard" ><a href="<?php genURL('games\category\\'.$item->id.'-'.$item->name) ?>" class="text-light">
                     <div class="card bg-dark text-white" id="homeCategoryInnerCard">
                         <img src="<?php genURL('public\img\\'.$item->name.'.jpg') ?>" class="card-img" >
                         <div class="card-img-overlay">

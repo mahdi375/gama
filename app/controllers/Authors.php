@@ -15,12 +15,17 @@ class Authors extends Controller{
     public function create(){
         $this->view('authors/create');
     }
-    public function dashboard(){ //get id from session to authorize
+    public function dashboard($authorName){ //get id from session to authorize
         //authentication
         if(!isAuthorLoggedIn()){
             redirect('pages/home');
         }
         $author = $this->authorModel->getAuthorByEmail($_SESSION['author_email']);
+        //check url author entered name with db author name
+        if($authorName != $author->name){
+            $this->logout();
+        }
+        //unset password to prevent sending it to client 
         unset($author->password);
         if(is_null($author->img)){
             $author->img = '9999.jpg';
@@ -38,7 +43,7 @@ class Authors extends Controller{
     public function store(){ //ret status: success or status:failure, error:....
         //check request method
         if($_SERVER['REQUEST_METHOD'] !== 'POST'){
-            redirect('pages/games');
+            redirect('pages/home');
         }
         $validate=$this->validateRegForm();
         if(!$validate['result']){
@@ -47,12 +52,30 @@ class Authors extends Controller{
             die();
         }else{
             //store validated user
-            $id=$this->authorModel->insert($validate)->id;
+            $author=$this->authorModel->insert($validate);
+            $id=$author->id;
             $this->authorModel->storeImage($id);
+            $this->setSessionTo($author);
             unset($validate['password']);//to prevent output password
             $validate['status'] = 'success';
             echo json_encode($validate);
             };
+    }
+    public function update(){
+        //check request method
+        if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+            redirect('pages/home');
+        }
+        //now validate request body
+        $validate=$this->validateEditAccountRequest();
+        if($validate['result']){
+            $this->updateRecord();
+            $name=$validate['author']['name']?$validate['author']['name']:$_SESSION['author_name'];
+            echo json_encode(['result'=>true,'name'=>$name]);
+        }else{
+            //return errors
+            echo json_encode($validate);
+        }
     }
     public function login(){
         //check request method
@@ -76,7 +99,7 @@ class Authors extends Controller{
         unset($_SESSION['author_email']);
         redirect('Pages/home');
     }
-    //dashboard btns bar resources
+    //dashboard btns bar resources for ajax requests
     //should authorize !!!!!!!!!
     public function authorGames(){
         //authentication
@@ -100,6 +123,10 @@ class Authors extends Controller{
         ]);
     }
     public function addGame(){
+        //authentication
+        if(!isAuthorLoggedIn()){
+            die('Bad Request');
+        }
         //for html content
         ob_start();
             $data=[];
@@ -119,6 +146,10 @@ class Authors extends Controller{
         ]);
     }
     public function profile(){
+        //authentication
+        if(!isAuthorLoggedIn()){
+            die('Bad Request');
+        }
         //should pass author profile to view
         ob_start();
             $this->view('authors/ajax/profile');
@@ -136,6 +167,81 @@ class Authors extends Controller{
 
 
     //inner class methods
+    private function updateRecord(){
+        $dbAuthor=$this->authorModel->getAuthorByEmail($_SESSION['author_email']);
+        if($_POST['name'])
+        {
+            $name=htmlspecialchars(trim($_POST['name']));
+            $this->authorModel->updateName($_SESSION['author_id'],$name);
+            $_SESSION['author_name']=$name;
+        }
+        if($_POST['oldPassword'] and $_POST['newPassword']){
+            $password=htmlspecialchars($_POST['newPassword']);
+            $this->authorModel->updatePassword($_SESSION['author_id'],$password);
+        }
+        //update Image
+        if($_FILES['image']['name']){
+            $image=$dbAuthor->img;
+            $this->authorModel->uploadNewImage($_SESSION['author_id'],$image);
+        }
+    
+    }
+    private function validateEditAccountRequest(){//ret [true ,author] or [false ,errors]
+        $author = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+        if(!isset($author['name'])){
+            die('Bad Request');
+        }
+        $errors=[
+            'notAny'=>'',
+            'name_err'=>'',
+            'image_err'=>'',
+            'oldPassword_err'=>'',
+            'newPassword_err'=>'',
+            'confirmPassword_err'=>'',
+        ];
+        if(empty($author['name']) and empty($_FILES['image']['name']) and empty($author['newPassword'])){
+            $errors['notAny']='Nothings To Change !';
+        }
+        if(!empty($author['name']) and strlen($author['name'])<3){
+            $errors['name_err']='short name';
+        }
+        //validate old Password 
+        $dbAuthor=$this->authorModel->getAuthorByEmail($_SESSION['author_email']);
+        if( $author['oldPassword'] and !password_verify($author['oldPassword'],$dbAuthor->password)){
+            $errors['oldPassword_err']='Incorrect Password !';
+        }
+        //check new password
+        if(!empty($author['newPassword']) and strlen($author['newPassword'])<6){
+            $errors['newPassword_err']='short ! at least 6';
+        }elseif($author['newPassword']!==$author['confirm-password']){
+            $errors['confirmPassword_err']='not matches !';
+        }
+        //author can chande password without enter oldPassword
+        if($author['newPassword'] and empty($author['oldPassword'])){
+            $errors['newPassword_err']='Enter old Password !';
+        }
+        
+        //image validation
+        $validType=['image/png','image/jpg','image/jpeg'];
+        $image = $_FILES['image']['name']?$_FILES['image']:false;
+        if($image){
+            if(!in_array($image['type'],$validType)){
+                $errors['image_err']='Invalid image type !( png , jpg and jpeg are valid )';
+            }elseif($image['size']>200000){ //200kb
+                $errors['image_err']='Hight image size !';
+            }
+        }
+        
+        $output=[];
+        if(hsaError($errors)){
+            $output['result']=false;
+            $output['errors']=$errors;
+        }else{
+            $output['result']=true;
+            $output['author']=$author;
+        }
+        return $output;
+    }
     private function validateRegForm(){ //ret [true ,author] or [false ,errors]
         $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
         $errors=[

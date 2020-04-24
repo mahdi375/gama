@@ -1,8 +1,8 @@
 <?php require_once SITE_ROOT.'app/views/includes/header.php'; ?>
     <div class="container justify-content-center ">
-        <h1>Join Our Authors Group</h1>
+        <h1 class="mt-md-3 text-muted">Join Our Authors Group</h1>
         
-        <form id="registerForm" method="POST" enctype="multipart/form-data"> <!-- We sent it via ajax -->
+        <form id="registerForm" method="POST" class="mb-4 mt-md-5" enctype="multipart/form-data"> <!-- We sent it via ajax -->
             <div class="form-group">
                 <label for="registerName">Name <span class=" ml-4 text-danger" id="registerNameErr"></span></label>
                 <input type="text" class="form-control" name="name" id="registerName" placeholder="Enter Name">

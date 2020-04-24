@@ -4,10 +4,12 @@
 class Pages extends Controller{
 
     private $gameModel;
+    private $contactModel;
 
     public function __construct()
     {
-        $this->gameModel = $this->model('game');    
+        $this->gameModel = $this->model('game');
+        $this->contactModel = $this->model('contact');    
     }
     public function index()
     {
@@ -59,6 +61,15 @@ class Pages extends Controller{
     }
     public function contact()
     {
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+           $validate=$this->validateContactRequest();
+            //print_r($_POST);
+            if($validate['result']){
+                $this->contactModel->insert($validate['message']);
+            }
+            echo json_encode($validate);
+            return;
+        }
         $this->view('pages/contact');
     }
     public function about()
@@ -70,6 +81,38 @@ class Pages extends Controller{
         $data=[];
         $data['games']=$this->gameModel->getAcceptedGames();
         $this->view('pages/games',$data);
+    }
+
+    //inner methods
+    private function validateContactRequest()
+    {
+        $message=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+        $errors=[
+            'name_err'=>'',
+            'email_err'=>'',
+            'message_err'=>''
+        ];
+        if(empty(trim($message['name']))){
+            $errors['name_err']='name is required !';
+        }
+        if(empty(trim($message['email']))){
+            $errors['email_err']='Please enter your email !';
+        }elseif(!filter_var($message['email'],FILTER_VALIDATE_EMAIL)){
+            $errors['email_err']='This is not an email !';
+        }
+        if(empty(trim($message['message']))){
+            $errors['message_err']='Enter your message !';
+        }
+
+        $output=[];
+        if(!hsaError($errors)){
+            $output['result']=true;
+            $output['message']=$message;
+        }else{
+            $output['result']=false;
+            $output['errors']=$errors;
+        }
+        return $output;
     }
 }
 

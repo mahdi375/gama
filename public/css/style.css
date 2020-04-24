@@ -2,12 +2,11 @@
 {
     color: rgb(196, 77, 77);
 }
-
 @media(min-width:768px){
- #registerForm input , #registerForm label , #regFeedbackMessage
-{
-    max-width: 500px;
-}   
+    #registerForm input , #registerForm label , #regFeedbackMessage
+    {
+        max-width: 500px;
+    }   
 }
 @media( max-width:768px ) and ( min-width:575px){
     #loginEmailDiv
@@ -15,13 +14,7 @@
         position: relative;
         right: 13px;
     }
-    
 }
-@media(max-width:576px){
-   
-
-}
-
 @media(min-width:1258px){
     #logindiv
     {
@@ -35,4 +28,9 @@
 #registerForm button
 {
     width: 70px;
+}
+#contactPage #contactNameDiv , #contactPage #contactEmailDiv
+{
+    display: flex;
+    flex-direction: column;
 }
