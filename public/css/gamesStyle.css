@@ -8,7 +8,19 @@
     min-height: 72px;
 }
 
-@media(max-width:991){
+@media(max-width:586px){
+    #gamesPage #gamesCardImage
+    {
+        height: 18rem;
+    }
+}
+@media(max-width:478px){
+    #gamesPage #gamesCardImage
+    {
+        height: 12rem;
+    }
+}
+@media(max-width:991px){
     #gamesPage #gamesCardDescription
     {
         min-height: auto;

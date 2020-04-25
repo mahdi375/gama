@@ -76,10 +76,37 @@ class Pages extends Controller{
     {
         $this->view('pages/about');
     }
-    public function games()
+    public function games(int $page=1)
     {
+
         $data=[];
-        $data['games']=$this->gameModel->getAcceptedGames();
+        $allGames=$this->gameModel->getAcceptedGames();
+        //pagging proccess
+        $numberOfPages=ceil(count($allGames)/10);
+        $pages=[];
+        if($page !==1 and $page<$numberOfPages){
+            //middle pages
+            $pages=[$page-1,$page,$page+1];
+        }elseif($page===1){
+            //first pages
+            $pages=[1,2,3];
+        }else{
+            //last pages
+            $pages=[$page-2,$page-1,$page];
+        }
+
+
+        $first=10*$page-10;
+        $last=10*$page-1;
+        if(!isset($allGames[$last])){
+            $last=count($allGames)-1;
+        }
+        $games=[];
+        for($i=$first ; $i<=$last ; $i++){
+            array_push($games,$allGames[$i]);
+        }
+        $data['games']=$games;
+        $data['pages']=$pages;
         $this->view('pages/games',$data);
     }
 

@@ -23,7 +23,9 @@
                 }
                 ?></p>
                 <div class="row justify-content-around">
-                    <a href="#" id="dashGamesDeleteBtn" class="btn col col-sm-3 ">Delete</a>
+                    <form action="" class="btn col col-sm-3 " id="dashGamesDeleteForm">
+                        <button id="deleteFormBtn" name="gameID" value="<?php echo $game->id; ?>" onclick="deleteBtnClick(this)" >Delete</button>
+                    </form>
                     <a href="<?php genURL('games/show/'.$game->id.'-'.str_replace(' ','-',$game->title)) ?>" id="dashGamesMoreBtn" class="btn col col-sm-3 <?php if($game->state !=2){ echo 'disabled'; } ?> ">More</a>
                     <?php if($game->state == 2){ ?>
                     <a href="#" id="dashGameAccepteddBtn" class="btn col col-sm-3 disabled">Published</a>

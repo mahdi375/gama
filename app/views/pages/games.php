@@ -34,9 +34,18 @@
     <?php
     }
     ?>
-    
+ 
+    </div> 
+
+    <nav aria-label="Page navigation example" class="row justify-content-center mt-3 mt-md-5 mb-md-5">
+        <ul class="pagination">
+            <?php foreach($data['pages'] as $page_num){ ?>
+                <li class="page-item"><a class="page-link " href="<?php genURL('Pages/games/'.$page_num) ?>"><?php echo $page_num; ?></a></li>
+            <?php } ?>
+        </ul>
+    </nav>
+
+
 
 </div>
-
-    </div>
 <?php require_once SITE_ROOT.'app/views/includes/footer.php'; ?>

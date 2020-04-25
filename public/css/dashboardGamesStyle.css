@@ -1,9 +1,17 @@
 
-#dashGamesCardsDiv #dashGamesDeleteBtn
+#dashGamesCardsDiv #dashGamesDeleteForm
 {
+    padding: 0;
+    overflow: hidden;
+}
+#dashGamesCardsDiv #dashGamesDeleteForm #deleteFormBtn
+{
+    height: 100%;
+    width: 100%;
+    border: none;
     background-color: rgb(255, 227, 227);
 }
-#dashGamesCardsDiv #dashGamesDeleteBtn:hover
+#dashGamesCardsDiv #dashGamesDeleteForm #deleteFormBtn:hover
 {
     background-color: rgb(255, 177, 177);
 }

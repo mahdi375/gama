@@ -48,24 +48,46 @@ class Games extends Controller
         }
         //related games
         $related = $this->gameModel->getGamesOfCategory($game->category_id);
-        if(count($related)>4){
-            $i = 4 ;
-            while($i<(count($related)+2))
-            {
+        //delete current game
+        for($i=0;$i<count($related)-1;$i++){
+            if($related[$i]->id === $game->id){
                 unset($related[$i]);
-                $i++;
             }
         }
+        //related games should be less than 5 
+        if(count($related)>4){
+            while(4<(count($related)))
+            {
+                array_pop($related);
+            }
+        }
+        //description of related games should be short
         foreach($related as $relatedGame){
             if(strlen($relatedGame->description)>60 ){
                 $relatedGame->description = substr($relatedGame->description,0,56).' . . . ';
             }
             unset($relatedGame);
         }
+        //shouufle to prevent repeating
+        shuffle($related);
         $data=[];
         $data['related']=$related;
         $data['game']=$game;
         $this->view('games/show',$data);
+    }
+    public function delete()
+    {
+        //check request method
+        if($_SERVER['REQUEST_METHOD'] !== 'DELETE'){
+            die('bad request');
+        }
+        //print_r($_GET);
+        $id=filter_var($_REQUEST['gameID'],FILTER_VALIDATE_INT);
+        if($this->gameModel->destroy($id)){
+            echo json_encode(['result'=>true]);
+        }else{
+            die('Some thing want wrong');
+        }
     }
     public function category($title)
     {

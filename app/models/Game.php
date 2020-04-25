@@ -92,6 +92,13 @@ class Game {
         $this->db->bind(':category',$categoryID);
         return $this->db->getResults();
     }
+    public function destroy($gameID){
+        $this->deleteGameImages($gameID);
+        $sql='DELETE FROM `games` WHERE id=:id';
+        $this->db->query($sql);
+        $this->db->bind(':id',$gameID);
+        return $this->db->execute();
+    }
 
 
     //inner class methods
@@ -102,6 +109,16 @@ class Game {
         $this->db->bind(':top',$First);
         $this->db->bind(':bottom',$Second);
         $this->db->execute();
+    }
+    private function deleteGameImages($gameID){
+        $game= $this->getGame($gameID);
+        $imgs=[$game->TopImg,$game->BottImg];
+        foreach($imgs as $img){
+            $file=SITE_ROOT.'public\uploads\games\\'.$img;
+            if(file_exists($file)){
+                unlink($file);
+            }
+        }
     }
 
 }
