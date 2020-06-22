@@ -14,4 +14,7 @@ foreach(glob(SITE_ROOT.'app/helpers/*.php') as $helpFile ){
     require_once $helpFile;
 }
 
+
+$core = new Core();
+
 ?>
