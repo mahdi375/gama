@@ -13,7 +13,12 @@ class Core {
     public function __construct()
     {
         $route = $this->Routing();
-        call_user_func_array([$route['controller'],$route['method']],$route['param']);
+        //to separate API part
+        if ($route[0]??'' === 'api') {
+            $api = new Api($route);
+        }else{
+            call_user_func_array([$route['controller'],$route['method']],$route['param']);
+        }
     }
     //Return [ $requestMethod , $controller , $method , $param ]
     public function Routing()
@@ -22,7 +27,10 @@ class Core {
 
         $url=str_replace('url=','',$_SERVER['QUERY_STRING']);
         $url=explode('/',rtrim($url,'/'));
-        
+        //check for api
+        if($url[0] == 'api') {
+            return $url;
+        }
         //check controller
         if(file_exists(SITE_ROOT.'app/controllers/'.ucwords($url[0]).'.php')){
            $this->controller=ucwords($url[0]);
